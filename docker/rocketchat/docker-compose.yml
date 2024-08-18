@@ -17,9 +17,6 @@ services:
       - Accounts_UseDNSDomainCheck=false
     depends_on:
       - mongo
-    networks:
-      - net
-      - rocket
 
   mongo:
     image: mongo:4.0
@@ -35,11 +32,4 @@ services:
     command: 'bash -c "for i in `seq 1 30`; do mongo mongo/rocketchat --eval \"rs.initiate({ _id: ''rs0'', members: [ { _id: 0, host: ''localhost:27017'' } ]})\" && s=$$? && break || s=$$?; echo \"Tried $$i times. Waiting 5 secs...\"; sleep 5; done; (exit $$s)"'
     depends_on:
       - mongo
-    networks:
-      - rocket
 
-networks:
-  net:
-    external: true
-  rocket:
-    internal: true
