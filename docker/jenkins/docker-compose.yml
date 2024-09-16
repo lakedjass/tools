@@ -1,0 +1,10 @@
+services:
+  oldman-jenkins:
+    image: jenkins/jenkins:lts-jdk17
+      - "18082:8080"
+    volumes:
+      - jenkins-vol:/var/jenkins_home
+
+volumes:
+  jenkins-vol:
+    driver: local
